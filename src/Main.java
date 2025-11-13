@@ -1,15 +1,7 @@
-import java.sql.SQLOutput;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-    static Map<EnumaClass.Operation, OperationExecut> operations =
-            Map.<EnumaClass.Operation, OperationExecut>of(
-                    EnumaClass.Operation.ADD, new Addition(),
-                    EnumaClass.Operation.SUBTRACT, new Subtraction(),
-                    EnumaClass.Operation.DIVIDE, new Division(),
-                    EnumaClass.Operation.MULTIPLY, new Multiplication()
-    );
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -17,6 +9,7 @@ public class Main {
         double number_1=0;
         double number_2=0;
         double result = 0;
+        OperationFabric operationFabric = new OperationFabric();
 
         while (choice <5){
             System.out.println("Select an operation:");
@@ -24,20 +17,29 @@ public class Main {
                 System.out.println(op); // afișează frumos: "1. Addition", "2. Subtraction", etc.
             }
             choice = sc.nextInt();
-            EnumaClass.Operation selected = EnumaClass.Operation.fromCode(choice); // salvarea Label-ul selectat de la tastatura
-            if (choice == 5){
+
+            if (choice == 5 ){
+                System.out.println("Bye bye!!");
+                break;
+            } else if (choice >5 || choice <=0) {
+                System.out.println("Sorry but this value isn't to menu");
                 break;
             }
+
+            EnumaClass.Operation selected = EnumaClass.Operation.fromCode(choice); // salvarea Label-ul selectat de la tastatura
             System.out.println("Need first number: ");
             number_1 = sc.nextDouble();
             System.out.println("Need last number: ");
             number_2 = sc.nextDouble();
-            result = operations.get(selected).execute(number_1,number_2);
+
+            OperationExecut operationExecutor = operationFabric.CreateExecutor(selected);
+
+            result = operationExecutor.execute(number_1,number_2);
             System.out.println("Result is: "+ result);
 
         }
 
-        System.out.println("Bye bye!!");
+
     }
 
 }

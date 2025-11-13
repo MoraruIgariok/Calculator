@@ -4,6 +4,7 @@ public class Division implements  OperationExecut{
             System.out.println("Processing Division operation of values: " + a + " and " + b);
             return a / b;
         }
+        System.out.println("This b value need be great zero!");
         return 0;
 
     }
