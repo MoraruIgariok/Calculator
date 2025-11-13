@@ -18,14 +18,16 @@ public class Main {
         double number_2=0;
         double result = 0;
 
-        while (choice <=5 && choice >0){
+        while (choice <5){
             System.out.println("Select an operation:");
             for (EnumaClass.Operation op : EnumaClass.Operation.values()) {
                 System.out.println(op); // afișează frumos: "1. Addition", "2. Subtraction", etc.
             }
             choice = sc.nextInt();
             EnumaClass.Operation selected = EnumaClass.Operation.fromCode(choice); // salvarea Label-ul selectat de la tastatura
-
+            if (choice == 5){
+                break;
+            }
             System.out.println("Need first number: ");
             number_1 = sc.nextDouble();
             System.out.println("Need last number: ");
@@ -33,13 +35,9 @@ public class Main {
             result = operations.get(selected).execute(number_1,number_2);
             System.out.println("Result is: "+ result);
 
-
-
         }
 
-
-
-
+        System.out.println("Bye bye!!");
     }
 
 }
